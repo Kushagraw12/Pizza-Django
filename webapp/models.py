@@ -6,10 +6,10 @@ from django.dispatch import receiver
 
 class pizza(models.Model):
     title = models.CharField(max_length = 100, null = False, default = 'EMPTY TITLE')
-    type = models.CharField(max_length = 10) 
-    size = models.CharField(max_length = 25)
-    toppings = models.CharField(max_length = 200) 
-    slug = models.SlugField(blank = True, unique = True)
+    type = models.CharField(max_length = 10) # Regular, Square
+    size = models.CharField(max_length = 25) # Small, Medium, Large
+    toppings = models.CharField(max_length = 400) # List of all the toppings on the pizza
+    slug = models.SlugField(blank = True, unique = True) #Auto Created;Unique for all;Used for searching a particular pizza in db
 
     def __str__(self):
 	    return self.title
