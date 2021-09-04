@@ -60,7 +60,7 @@ Response: Returns all the pizzas with the requested size
 4. GET | (filtered by type)<br />
 ```http://127.0.0.1:8000/all_type/<type>```<br />
 Expects: The 'type' of the pizza<br />
-{Currently, only "Regular" and "Small" types are supported, sending any other type other than these will return a 400 error}<br />
+{Currently, only "Regular" and "Square" types are supported, sending any other type other than these will return a 400 error}<br />
 Response: Returns all pizzas with the requested type
 
 5. PUT | (Edit/Update)<br />
