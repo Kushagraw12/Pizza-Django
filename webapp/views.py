@@ -27,8 +27,11 @@ def api_indiv_pizza_view(request, slug):
         return Response("NOT ALLOWED :: Database 'Pizza' does not exist", status = status.HTTP_404_NOT_FOUND)
     
     if request.method == "GET":
+        if(len(p1) == 0):
+            return Response("FAIL :: Requested Pizza Not Found", status = status.HTTP_404_NOT_FOUND)
         ser = pizzaSerializer(p1)
-        return Response(ser.data, status = status.HTTP_200_OK) 
+        return Response(ser.data, status = status.HTTP_200_OK)
+
 
 
 #3. Lists all pizzas in databse, filtered according to the requested SIZE
