@@ -22,6 +22,8 @@ from webapp.views import (
     api_update_pizza_view,
     api_delete_pizza_view,
     api_create_pizza_view,
+    api_size_filter_pizza_view,
+    api_type_filter_pizza_view
 )
 
 app_name = "pizza"
@@ -30,7 +32,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('pizzas/', api_all_pizza_view, name = "details"),
     path('pizza/<slug>', api_indiv_pizza_view, name = "detail"),
-    path('pizza/<slug>/update', api_update_pizza_view, name = "update"),
-    path('pizza/<slug>/delete', api_delete_pizza_view, name = "delete"),
+    path('pizza/update/<slug>', api_update_pizza_view, name = "update"),
+    path('pizza/delete/<slug>', api_delete_pizza_view, name = "delete"),
     path('createPizza', api_create_pizza_view, name = "create"),
+    path('pizza/all_size/<size>', api_size_filter_pizza_view, name = "sizeFilter"),
+    path('pizza/all_type/<type>', api_type_filter_pizza_view, name = "typeFilter"),
 ]
