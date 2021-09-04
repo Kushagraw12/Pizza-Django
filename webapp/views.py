@@ -5,13 +5,13 @@ from . models import pizza
 from . serializers import pizzaSerializer
 
 # GET API
-#1. Lists all pizzas in databse
+#1. Lists all pizzas in database
 @api_view(['GET', ])
 def api_all_pizza_view(request):
     try:
         p1 = pizza.objects.all()
     except pizza.DoesNotExist:
-        return Response("NOT ALLOWED :: Database Pizza does not exist", status = status.HTTP_404_NOT_FOUND)
+        return Response("NOT ALLOWED :: Database 'Pizza' does not exist", status = status.HTTP_404_NOT_FOUND)
     
     if request.method == "GET":
         ser = pizzaSerializer(p1, many = True)
@@ -24,7 +24,7 @@ def api_indiv_pizza_view(request, slug):
     try:
         p1 = pizza.objects.get(slug = slug)
     except pizza.DoesNotExist:
-        return Response("NOT ALLOWED :: Database Pizza does not exist", status = status.HTTP_404_NOT_FOUND)
+        return Response("NOT ALLOWED :: Database 'Pizza' does not exist", status = status.HTTP_404_NOT_FOUND)
     
     if request.method == "GET":
         ser = pizzaSerializer(p1)
@@ -42,9 +42,9 @@ def api_size_filter_pizza_view(request, size):
     if request.method == "GET":
         ser = pizzaSerializer(p1, many = True)
         if(len(p1) == 0):
-            return Response("FAIL :: No pizza of such size exists", status = status.HTTP_404_NOT_FOUND)
+            return Response("FAIL :: No pizza of the given size exists", status = status.HTTP_404_NOT_FOUND)
         return Response(ser.data, status = status.HTTP_200_OK)
-    return Response("FAIL :: No pizza of such size exists", status = status.HTTP_404_NOT_FOUND)
+    return Response("FAIL :: No pizza of the given size exists", status = status.HTTP_404_NOT_FOUND)
 
 
 #4. Lists all pizzas in databse, filtered according to the requested TYPE
@@ -84,11 +84,11 @@ def api_update_pizza_view(request, slug):
             return Response("Not Updated :: Size Missing", status = status.HTTP_400_BAD_REQUEST)
         if d["type"][0] == 'Regular' or d["type"][0] == 'Square':
             ser = pizzaSerializer(p1, data = request.data)
-            data = {}
+            # data = {}
 
             if ser.is_valid():
                 ser.save()
-                data["success"] = "update succesful"
+                # data["Success"] = "Update Succesful"
                 return Response(data = ser.data, status = status.HTTP_200_OK)       
             return Response(ser.errors, status = status.HTTP_400_BAD_REQUEST)
         return Response(f"Not Updated ::  Pizza Type '{d['type'][0]}' not allowed", status = status.HTTP_400_BAD_REQUEST) 
@@ -107,9 +107,9 @@ def api_delete_pizza_view(request, slug):
         operation = p1.delete() 
         data = {}
         if operation:
-            data["success"] = "delete succesfull"
+            data["success"] = "Delete Succesfull"
         else:
-            data["failure"] = "delete failed"
+            data["failure"] = "Delete Failed"
         return Response(data = data)
 
 
